@@ -17,7 +17,8 @@ class UserProfile(View):
             user_profile = Profile.objects.get(user=request.user)
         except Profile.DoesNotExist:
             user_profile = None
-            form_data = {
+
+        form_data = {
                 'name': user_profile.full_name if user_profile else '',
                 'email': request.user.email if user_profile else '',
                 'designation': user_profile.designation if user_profile else '',
@@ -27,13 +28,13 @@ class UserProfile(View):
                 'city': user_profile.city if user_profile else '',
                 'state': user_profile.state if user_profile else '',
                 'country': user_profile.country if user_profile else '',
-            }
+        }
 
-            context = {
+        context = {
                 'profile': user_profile,
                 'form_data': form_data
-            }
-            return render(request, self.template_name, context)
+        }
+        return render(request, self.template_name, context)
 
     def post(self, request):
 
